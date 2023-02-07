@@ -16,6 +16,7 @@
  */
 PCBTable::PCBTable(int size) {
    // TODO: add your code here
+   this->table.resize(size);
 }
 
 /**
