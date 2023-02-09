@@ -3,7 +3,6 @@
  * @file pcbtable.h
  * @author Lucas Gomes
  * @brief This is the implementation file for the PCBTable class.
- * //You must complete the all parts marked as "TODO". Delete "TODO" after you are done.
  * // Remember to add sufficient comments to your code
  */
 
@@ -15,8 +14,11 @@
  * @param size: the capacity of the PCBTable
  */
 PCBTable::PCBTable(int size) {
-   // TODO: add your code here
-   this->table.resize(size);
+   this->table.resize(size);//resize the vector to the given size value
+   for(int i=0;i<table.size();i++)//initialize each index to nullptr
+   {
+    table[i]=nullptr;
+   }
 }
 
 /**
@@ -24,7 +26,14 @@ PCBTable::PCBTable(int size) {
  *
  */
 PCBTable::~PCBTable() {
-   // TODO: add your code here
+   for(int i=0;i<this->table.size();i++)//loop through all indexes of the table
+   {
+        if(table[i])//if the index has a pdb object/is not null, delete it and set to null
+        {
+            delete table[i];
+            table[i]=nullptr;
+        }  
+   }
 }
 
 /**
@@ -34,7 +43,8 @@ PCBTable::~PCBTable() {
  * @return PCB*: pointer to the PCB at index "idx"
  */
 PCB* PCBTable::getPCB(unsigned int idx) {
-    // TODO: add your code here
+    if(this->table.at(idx))//if there is a pointer at the given index, return the pointer
+        return table.at(idx);
     return NULL;
 }
 
@@ -44,5 +54,6 @@ PCB* PCBTable::getPCB(unsigned int idx) {
  * @param pcb: the PCB to add
  */
 void PCBTable::addPCB(PCB *pcb, unsigned int idx) {
-    // TODO: add your code here
+    if(!this->table[idx])//if the requested index is not already full, add the PCB into that position
+        this->table[idx]=pcb;
 }
